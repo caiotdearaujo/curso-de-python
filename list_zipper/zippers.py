@@ -7,6 +7,7 @@ def zip_smallest(list1, list2):
 
 def zip_longest(list1, list2, fillvalue=None):
     interval = max(len(list1), len(list2))
+    
     result = []
     for i in range(interval):
         if len(list1) <= i:
