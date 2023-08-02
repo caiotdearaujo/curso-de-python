@@ -1,3 +1,5 @@
+from itertools import zip_longest
+
 def get_min_len(*args):
     for index, item in enumerate(args):
         if index == 0:
@@ -6,14 +8,13 @@ def get_min_len(*args):
             min_len = len(item)
     return min_len
 
-def sum_lists(*lists):
-    interval = get_min_len(*lists)
-
-    result_list = []
-    for i in range(interval):
-        result = 0
-        for l in lists:
-            result += l[i]
-        result_list.append(result)
-    
-    return result_list
+def sum_lists(*lists, mode="s"):
+    match mode:
+        case "s":
+            zipped_list = zip(*lists)
+        case "l":
+            zipped_list = zip_longest(*lists, fillvalue=0)
+        case _:
+            raise TypeError("Only 's' and 'l' are accepted as modes")
+        
+    return [sum(i) for i in zipped_list]
